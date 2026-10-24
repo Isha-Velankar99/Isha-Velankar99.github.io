@@ -46,6 +46,9 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 800; line-height: 1.1
 .top-in { display: flex; align-items: center; height: 60px; }
 .me { font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--navy); }
 .top-tag { margin-left: auto; font-size: 14px; color: var(--muted); }
+.top-back { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: var(--navy); }
+.top-back .ms { font-size: 18px; }
+.top-back:hover { color: var(--signal); text-decoration: underline; text-underline-offset: 4px; }
 
 .journey { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--white) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--stone); }
 .journey ol { display: flex; align-items: center; gap: 6px; height: 56px; }

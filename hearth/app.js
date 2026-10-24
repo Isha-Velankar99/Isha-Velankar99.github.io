@@ -340,7 +340,7 @@ const route = () => { const r = location.hash.replace(/^#\/?/, ""); return r ===
 function render(keep) {
   const i = route(), y = scrollY;
   document.getElementById("app").innerHTML = `
-    <header class="top"><div class="wrap top-in"><a class="me" href="/">Isha Velankar</a><span class="top-tag">Hearth · hotel journey</span></div></header>
+    <header class="top"><div class="wrap top-in"><a class="me" href="/#top">Isha Velankar</a><a class="top-tag top-back" href="/#work"><span class="ms">arrow_back</span>Back to portfolio</a></div></header>
     ${i !== -1 ? journey(i === -2 ? 0 : i + 1) : ""}
     ${i === -2 ? `<main class="cover-band"><div class="wrap">${cover()}</div></main>` : `<main class="wrap">${i === 4 ? impact() : i === -1 ? credits() : stopPage(i)}</main>`}
     <footer class="ftr"><div class="wrap">Hearth is a rebranded version of work I shipped at a travel-tech company; company and partner names and data are left out. <a href="#/credits">Photo credits</a></div></footer>`;
