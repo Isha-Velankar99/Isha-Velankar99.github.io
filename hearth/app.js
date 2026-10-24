@@ -211,7 +211,7 @@ function cover() {
       <span class="node">${i + 1}</span><small>${s.stage}${s.rolledBack ? '<span class="tag-rb">Rolled back</span>' : ""}</small><q>${s.doubt}</q>
       <span class="r-feat">${s.title}<span class="ms">arrow_forward</span></span></a></li>`).join("")}</ol>
     <div class="cover-foot">
-      <a class="teaser" href="#/impact"><b>≈ +25%</b><span>booking conversion · three live, one rolled back</span><span class="ms">arrow_forward</span></a>
+      <a class="teaser" href="#/impact"><b>+22%</b><span>booking conversion · three live, one rolled back</span><span class="ms">arrow_forward</span></a>
       <a class="btn btn-light" href="#/1">Start with Discover<span class="ms">arrow_forward</span></a>
     </div>
   </section>`;
@@ -291,7 +291,7 @@ function routeChart() {
   const pts = [[40, 200], [230, 200], [420, 150], [610, 150], [800, 90], [960, 90]];
   const labels = ["Before", ...STOPS.map(s => s.stage), "After"];
   const notes = ["", "8–10s on Deals", "4 in 10 book here", "", "+32% to payment", ""];
-  return `<figure class="route-chart"><svg viewBox="0 0 1000 250" role="img" aria-label="Booking conversion rose step by step along the journey: Deals brought more intent, Vio kept 4 in 10 guests on the page, pay later was rolled back, and the review step moved 32% more guests to payment, ending at about plus 25%.">
+  return `<figure class="route-chart"><svg viewBox="0 0 1000 250" role="img" aria-label="Booking conversion rose step by step along the journey: Deals brought more intent, Vio kept 4 in 10 guests on the page, pay later was rolled back, and the review step moved 32% more guests to payment, ending at plus 22% booking conversion overall.">
     <line class="rc-base" x1="40" y1="200" x2="960" y2="200"/>
     <polyline class="rc-line" points="${pts.map(p => p.join(",")).join(" ")}"/>
     <line class="rc-blip" x1="610" y1="150" x2="610" y2="96"/><circle class="rc-ghost" cx="610" cy="96" r="9"/>
@@ -300,7 +300,7 @@ function routeChart() {
       : i === 5 ? `<circle class="rc-end" cx="${x}" cy="${y}" r="16"/>`
       : `<circle class="rc-node${i === 3 ? " rc-node--rb" : ""}" cx="${x}" cy="${y}" r="14"/><text class="rc-num" x="${x}" y="${y + 5}">${i}</text>`).join("")}
     ${notes.map((n, i) => n ? `<text class="rc-note" x="${pts[i][0]}" y="${pts[i][1] - 26}">${n}</text>` : "").join("")}
-    <text class="rc-big" x="975" y="142">≈ +25%</text>
+    <text class="rc-big" x="975" y="142">+22%</text>
     ${labels.map((l, i) => `<text class="rc-label" x="${pts[i][0]}" y="236">${l}</text>`).join("")}
   </svg><figcaption>Booking conversion along the journey · schematic, not to scale</figcaption></figure>`;
 }
@@ -314,8 +314,8 @@ function impact() {
   ];
   return `<article class="stop impact">
     <header class="stop-head"><p class="eyebrow">Outcome</p>
-      <h2><span class="hl">≈ +25%</span> booking conversion</h2>
-      <p class="lede">Across the hotel journey. Three upgrades live, one rolled back.</p></header>
+      <h2><span class="hl">+22%</span> booking conversion</h2>
+      <p class="lede">Measured across the hotel journey. Three upgrades live, one rolled back.</p></header>
     ${routeChart()}
     <h3 class="why-h">Why it moved</h3>
     <ol class="why">${why.map((t, k) => `<li class="${STOPS[k].rolledBack ? "rb" : ""}"><a href="#/${k + 1}"><span class="why-n">${STOPS[k].result[0]}</span><span>${t}</span><span class="ms">arrow_forward</span></a></li>`).join("")}</ol>
