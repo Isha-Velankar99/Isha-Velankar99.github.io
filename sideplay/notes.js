@@ -70,7 +70,7 @@
   const notes = () => (NOTES[view()] || []).map(n => [document.querySelector(n[0]), ...n.slice(1)]).filter(n => n[0] && n[0].getClientRects().length);
 
   function drawBar() {
-    bar.innerHTML = `<button class="pn-toggle ${on ? "on" : ""}" aria-pressed="${on}"><span class="ms">lightbulb</span><span class="pn-long">Product notes</span><span class="pn-short">Notes</span> ${on ? "on" : "off"}</button><a href="${CASE_STUDY}">Case study</a>`;
+    bar.innerHTML = `<a class="pn-home" href="/#work" aria-label="Back to Isha's portfolio"><span class="ms">arrow_back</span><span class="pn-long">Portfolio</span></a><button class="pn-toggle ${on ? "on" : ""}" aria-pressed="${on}"><span class="ms">lightbulb</span><span class="pn-long">Product notes</span><span class="pn-short">Notes</span> ${on ? "on" : "off"}</button><a href="${CASE_STUDY}">Case study</a>`;
   }
   bar.addEventListener("click", e => {
     if (!e.target.closest(".pn-toggle")) return;

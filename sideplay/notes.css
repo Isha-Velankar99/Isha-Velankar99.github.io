@@ -10,6 +10,9 @@
 .pn-toggle .ms { font-size: 18px; }
 .pn-toggle.on { background: var(--matcha); color: var(--forest); }
 .pn-bar a { color: rgba(255,255,255,.85); text-decoration: underline; text-underline-offset: 3px; }
+.pn-bar .pn-home { text-decoration: none; color: #fff; gap: 4px; padding: 0 12px 0 8px; border-right: 1px solid rgba(255,255,255,.18); border-radius: 99px 0 0 99px; }
+.pn-bar .pn-home .ms { font-size: 18px; }
+.pn-bar .pn-home:hover { background: rgba(255,255,255,.1); }
 
 .pn-card { position: fixed; left: 12px; right: 12px; z-index: 60; max-width: 400px; background: var(--forest-deep); color: #fff; border-radius: var(--radius-lg); padding: 16px 18px 18px; box-shadow: 0 16px 40px rgba(25,51,36,.35); font-size: 15px; line-height: 1.5; }
 .pn-card[hidden] { display: none; }
