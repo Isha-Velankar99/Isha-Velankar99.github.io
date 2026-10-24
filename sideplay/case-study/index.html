@@ -23,6 +23,9 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.02em; line-height: 1
 
 /* Hero */
 .top { background: var(--forest-deep); color: #fff; padding: 72px 0 0; overflow: hidden; }
+.cs-back { display: flex; justify-content: space-between; gap: 16px; margin: -40px 0 40px; font-size: 14px; font-weight: 600; }
+.cs-back a { color: rgba(255,255,255,.85); text-decoration: none; }
+.cs-back a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
 .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--matcha); }
 .top h1 { font-size: clamp(40px, 6vw, 68px); margin: 14px 0 18px; }
 .top .lede { font-size: 20px; color: rgba(255,255,255,.86); max-width: 640px; }
@@ -195,6 +198,7 @@ footer { padding-bottom: 96px; }
 
 <header class="top">
   <div class="wrap">
+    <nav class="cs-back" aria-label="Back"><a href="/#work">← Back to portfolio</a><a href="../index.html?notes=1">Open the prototype</a></nav>
     <span class="eyebrow">Case study · Product Owner</span>
     <h1>Making the match part of the trip</h1>
     <p class="lede">Travellers book match tickets alongside their hotel, in one flow. As Product Owner I made the case, set the scope, designed the experience and built the frontend.</p>
