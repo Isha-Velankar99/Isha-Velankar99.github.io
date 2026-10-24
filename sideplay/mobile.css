@@ -1,0 +1,226 @@
+/* ============================================================
+   SIDEPLAY — mobile layer. Loaded after styles.css.
+   < lg (1024px): app shell — bottom tabs, search sheet, no mega-menus
+   < md (768px):  phone layouts for every page
+   Breakpoints are documented at the top of styles.css.
+   ============================================================ */
+
+.tabbar, .m-search, .stepper-m, .sm-only, .total-bar { display: none; }
+body.no-scroll { overflow: hidden; }
+@media (hover: none) { .photo:hover, .chip:hover { transform: none; } }
+
+/* ---------- Explore page (all sizes) ---------- */
+.segmented { display: inline-grid; grid-template-columns: 1fr 1fr; background: var(--subtle); border: 1px solid var(--line); border-radius: 99px; padding: 4px; margin: 8px 0 24px; min-width: 280px; }
+.segmented a { text-align: center; height: 40px; line-height: 40px; border-radius: 99px; font-size: 15px; font-weight: 600; color: var(--muted); }
+.segmented a.on { background: var(--surface); color: var(--forest); box-shadow: 0 1px 3px rgba(41,49,42,.12); }
+.ex-list { display: grid; gap: 12px; }
+.ex-sport { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 8px 0 16px; overflow: hidden; }
+.ex-head { display: flex; align-items: center; gap: 12px; padding: 8px 16px 12px; min-height: 56px; }
+.ex-head strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 600; }
+.ex-head small { font-size: 13px; color: var(--muted); }
+.ex-head > .ms { margin-left: auto; color: var(--muted); }
+.ex-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
+.ex-chips::-webkit-scrollbar { display: none; }
+.pill { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; font-weight: 500; white-space: nowrap; flex: none; }
+.pill .ms { font-size: 18px; color: var(--forest); }
+.pill:hover { border-color: var(--forest); }
+.ex-all { width: 100%; margin-top: 16px; }
+.ex-cities { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.ex-city { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; color: #fff; background: var(--scrim), var(--bg, var(--forest)) center/cover; display: flex; align-items: flex-end; padding: 14px; }
+.ex-city strong { display: block; font-family: var(--font-display); font-size: 20px; font-weight: 600; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.ex-city small { font-size: 12px; opacity: .9; }
+
+/* ============================================================
+   < 1024px (lg) — app shell, phones and tablets
+   ============================================================ */
+@media (max-width: 1023.98px) {
+  .trips-link { display: none; }
+  /* Header search: hidden behind the search icon until opened, then replaces the logo */
+  .hsearch { display: none; }
+  body.searching .hsearch { display: flex; flex: 1; width: auto; margin-left: 0; }
+  body.searching .header .logo, body.searching .m-search { display: none; }
+  body.searching .sbox-cancel { display: block; }
+  .hsearch input { font-size: 16px; }
+  .header .sbox-drop { position: fixed; top: 56px; left: 0; right: 0; max-height: calc(100vh - 56px - 72px - env(safe-area-inset-bottom)); border-radius: 0 0 var(--radius) var(--radius); border-left: 0; border-right: 0; box-shadow: 0 24px 48px rgba(41,49,42,.18); }
+  body.searching::after { content: ""; position: fixed; inset: 56px 0 0; background: rgba(25,51,36,.35); z-index: 29; }
+  .m-search { display: grid; margin-left: auto; }
+  .tabbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; background: color-mix(in srgb, var(--surface) 96%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+  .tabbar a, .tabbar button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 52px; font-size: 11px; font-weight: 600; color: var(--muted); }
+  .tabbar .ms { font-size: 22px; width: 56px; height: 30px; line-height: 30px; text-align: center; border-radius: 99px; transition: background .15s; }
+  .tabbar .on { color: var(--forest); }
+  .tabbar .on .ms { background: var(--pale); }
+  .tabbar i { position: absolute; top: 2px; left: calc(50% + 8px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--matcha); color: var(--forest); font-size: 11px; font-style: normal; display: grid; place-items: center; }
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+  body.flow { padding-bottom: env(safe-area-inset-bottom); }
+  body.flow .tabbar, body.flow #ftr { display: none; }
+  body.has-bar { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  body[data-view="trip"], body[data-view="checkout"] { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .toast { bottom: calc(88px + env(safe-area-inset-bottom)); }
+
+  /* Booking flow: compact stepper + sticky total */
+  .stepper { display: none; }
+  .stepper-m { display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; align-items: center; padding: 16px 0 8px; font-size: 14px; color: var(--muted); }
+  .stepper-m b { color: var(--ink); font-weight: 600; }
+  .stepper-m a { font-size: 14px; font-weight: 600; color: var(--forest); padding: 4px 0; }
+  .stepper-m i { grid-column: 1 / -1; height: 4px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .stepper-m i b { display: block; height: 100%; background: var(--forest); border-radius: 99px; }
+  .total-bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--surface); border-top: 1px solid var(--line); }
+  .total-bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .tb-total { text-align: left; min-width: 0; }
+  .tb-total small { display: block; font-size: 12px; color: var(--muted); }
+  .tb-total b { display: block; font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.15; }
+  .tb-total span { font-size: 12px; font-weight: 600; color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+  .total-bar .btn { height: 48px; flex: none; }
+  .summary .btn { display: none; }
+}
+
+/* ============================================================
+   < 768px (md) — phone layouts
+   ============================================================ */
+@media (max-width: 767.98px) {
+  .sm-only { display: inline; }
+  .lg-only { display: none; }
+  .header > .wrap { height: 56px; gap: 8px; }
+  .page-head { padding: 20px 0 4px; }
+  .page-head h1 { font-size: 28px; }
+  .page-head p { font-size: 15px; }
+  .section { margin-top: 40px; }
+  .sec-head { margin-bottom: 16px; align-items: flex-end; }
+  .sec-head h2 { font-size: 22px; }
+  .sec-head p { font-size: 14px; }
+  .view-all { white-space: nowrap; }
+  .select select, .filters input { font-size: 16px; }
+
+  /* Edge-to-edge carousels so the next card peeks in */
+  .row, .chips, .filters, .tiers { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; scroll-padding-left: 16px; }
+  .row { gap: 12px; }
+  .pick { width: 64vw; height: calc(64vw * 1.3); max-width: 280px; max-height: 364px; }
+  .pick h3 { font-size: 17px; }
+  .ecard { width: 78vw; max-width: 320px; }
+  .comp-card { width: 72vw; height: 168px; }
+  .dest { width: 66vw; height: 232px; }
+  .venue-card { width: 56vw; height: 280px; }
+  .team-card { width: 40vw; padding: 18px 12px; }
+
+  /* Home */
+  .hero { margin-top: 12px; padding: 28px 20px 24px; border-radius: 16px; }
+  .hero h1 { font-size: 34px; margin: 10px 0 12px; }
+  .hero p { font-size: 15px; }
+  .hero-steps { gap: 6px 14px; margin-top: 16px; font-size: 13px; }
+  .hero-steps span { white-space: nowrap; }
+  .chips { display: flex; overflow-x: auto; gap: 8px; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; padding: 6px 16px 6px 6px; border-radius: 99px; gap: 10px; }
+  .chip .chip-ic { width: 36px; height: 36px; }
+  .chip .chip-ic .ms { font-size: 20px; }
+  .chip strong { font-size: 14px; }
+  .chip small { display: none; }
+  .how { gap: 8px; }
+  .how > div { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding: 16px; }
+  .how .n { width: 40px; height: 40px; margin: 0; grid-row: span 2; }
+  .how h3 { font-size: 16px; }
+  .how p { font-size: 14px; margin-top: 2px; }
+  .trust { padding: 20px; gap: 16px; }
+  .footer { margin-top: 56px; padding: 24px 0; }
+
+  /* Browse */
+  .filters { flex-wrap: nowrap; overflow-x: auto; margin-top: 16px; margin-bottom: 16px; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters > * { flex: none; }
+  .filters input { min-width: 180px; flex: none; }
+  .result { grid-template-columns: 52px 1fr; gap: 4px 14px; padding: 14px; }
+  .date-block { padding: 6px 0; }
+  .date-block b { font-size: 19px; }
+  .result h3 { font-size: 16px; }
+  .result .meta { font-size: 13px; }
+  .result .tags .badge-soft { display: none; }
+  .result .tags:empty { display: none; }
+  .result .right { margin-top: 10px; padding-top: 10px; }
+  .result .right b { font-size: 19px; }
+
+  /* Event: compact header, tier pills, slimmer listings */
+  .event-hero { padding: 16px 0 12px; gap: 12px; }
+  .event-hero h1 { font-size: 26px; }
+  .event-meta { gap: 6px 14px; font-size: 13px; margin-top: 8px; }
+  .event-hero .qty-btn { justify-self: start; }
+  .tiers { display: flex; overflow-x: auto; gap: 8px; margin-bottom: 16px; scrollbar-width: none; }
+  .tiers::-webkit-scrollbar { display: none; }
+  .tier { flex: none; padding: 10px 14px; border-radius: 12px; }
+  .tier strong { font-size: 15px; }
+  .tier .from { font-size: 12px; }
+  .seat-layout { gap: 16px; }
+  .map-card { padding: 8px 8px 12px; border-radius: var(--radius); }
+  .legend { gap: 6px 12px; font-size: 11px; }
+  .listing { gap: 12px; padding: 12px 12px 12px 0; grid-template-columns: 5px 1fr auto; }
+  .listing h4 { font-size: 16px; }
+  .listing h4 small { display: block; font-size: 12px; margin-top: 2px; }
+  .listing h4 small::before { content: none; }
+  .listing .feats { margin-top: 6px; }
+  .listing .feats > span:nth-child(n+3) { display: none; }
+  .listing .tags:empty { display: none; }
+  .listing .right b { font-size: 18px; }
+  .score { margin-top: 4px; }
+  .action-bar .wrap { min-height: 0; padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); gap: 12px; }
+  .action-bar .what { font-size: 12px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .action-bar .what b { font-size: 22px; }
+  .action-bar .btn { height: 48px; flex: none; }
+
+  /* Ticket-quantity dialog becomes a bottom sheet */
+  .modal-bg { place-items: end stretch; padding: 0; }
+  .modal { width: 100%; border-radius: 20px 20px 0 0; padding: 12px 20px calc(20px + env(safe-area-inset-bottom)); animation: sheet-up .22s ease-out; }
+  .modal::before { content: ""; display: block; width: 40px; height: 4px; border-radius: 99px; background: var(--line); margin: 0 auto 16px; }
+  .modal h2 { font-size: 24px; }
+  .qty-grid { margin: 20px 0; }
+  .qty-grid button { height: 52px; }
+
+  /* Trip & checkout */
+  .two-col { margin-top: 8px; gap: 12px; }
+  .card { padding: 20px 16px; border-radius: var(--radius); }
+  .card + .card { margin-top: 12px; }
+  .card h2 { font-size: 20px; }
+  .card .lead { font-size: 14px; }
+  .stay-dates { margin: 16px 0 12px; gap: 10px; }
+  .stay-dates .field { min-width: 0; flex: 1 1 40%; }
+  .hotel { grid-template-columns: 84px 1fr; gap: 12px; padding: 10px; }
+  .hotel .img { aspect-ratio: 1; }
+  .hotel h3 { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hotel .stars { font-size: 12px; }
+  .hotel .meta { font-size: 12px; gap: 6px; }
+  .hotel .right { grid-column: 2; display: flex; align-items: baseline; gap: 8px; padding: 0; }
+  .hotel .right b { font-size: 17px; }
+  .hotel.skip .right { grid-column: auto; }
+  .extra { display: grid; grid-template-columns: 24px 1fr auto; gap: 4px 12px; padding: 14px 12px; }
+  .extra > .ms { grid-row: span 2; }
+  .extra b { grid-column: 2; grid-row: 2; font-size: 13px; color: var(--forest); }
+  .extra input { grid-column: 3; grid-row: 1 / span 2; }
+  .extra small { display: block; }
+  .form-grid { gap: 12px; margin-top: 16px; }
+  .summary { margin-top: 4px; }
+
+  /* Confirmation */
+  .confirm-head { padding: 32px 0 20px; }
+  .confirm-head h1 { font-size: 28px; }
+
+  /* Hub pages */
+  .hub-hero { min-height: 300px; padding: 24px 20px; border-radius: 16px; margin-top: 12px; }
+  .hub-hero h1 { font-size: 34px; }
+  .hub-hero .tagline { font-size: 15px; }
+  .hh-facts { margin-top: 16px; gap: 6px; }
+  .hh-facts > span { height: 30px; font-size: 12px; padding: 0 10px; }
+  .hero-crest { width: 52px; height: 57px; }
+  .fx-chips { flex-wrap: nowrap; overflow-x: auto; margin-left: -16px; margin-right: -16px; padding: 0 16px; scrollbar-width: none; }
+  .fx-chips::-webkit-scrollbar { display: none; }
+  .fx { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 12px; padding: 12px; }
+  .fx-go { display: none; }
+  .fx-date b { font-size: 19px; }
+  .fx-team { font-size: 15px; }
+  .fx-side b { font-size: 17px; }
+  .fx-side .badge { font-size: 11px; padding: 3px 6px; }
+  .trip-strip { padding: 16px; gap: 12px; }
+  .trip-strip > .ms { width: 40px; height: 40px; font-size: 20px; }
+
+  /* Explore */
+  .segmented { display: grid; width: 100%; min-width: 0; margin-bottom: 16px; }
+  .ex-cities { grid-template-columns: 1fr 1fr; gap: 10px; }
+}
+@keyframes sheet-up { from { transform: translateY(100%); } }
